@@ -51,7 +51,7 @@ newsRouter.get("/:id", async (req, res) => {
     const [result] = await connection.query('SELECT * FROM news WHERE id = ?', [id]);
     const news = result as News[];
     if (news.length === 0) {
-        res.status(404).send(`No subject found with this ${id}`);
+        res.status(404).send(`No news found with this ${id}`);
     } else {
         res.status(200).send(news[0]);
     }

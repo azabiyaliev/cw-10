@@ -11,8 +11,8 @@ export type NewstWithoutIdAndDate = Omit<News, "id", "date">
 export interface Comment {
     id: string;
     news_id: string;
-    author: string;
+    author: string | null;
     content: string;
 }
 
-export type CommentWithoutIdAndDate = Omit<Comment, "id">
+export type CommentWithoutId = Omit<Comment, "id">
