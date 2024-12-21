@@ -1,7 +1,7 @@
 import {useAppDispatch, useAppSelector} from "../../../app/hooks.ts";
 import {resNewsList} from "./newsSlice.ts";
 import {useEffect} from "react";
-import {fetchNews} from "../store/thunks/thunks.ts";
+import {fetchDeleteNews, fetchNews} from "../store/thunks/thunks.ts";
 import {Box, Button, Card, CardContent, CardMedia, Container, Typography} from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import {apiUrl} from "../../../globalConstants.ts";
@@ -17,6 +17,11 @@ const News = () => {
     useEffect(() => {
         dispatch(fetchNews());
     },[dispatch])
+
+    const onDelete = async (id: number) => {
+        await dispatch(fetchDeleteNews(id));
+        await dispatch(fetchNews());
+    }
 
     return (
         <Container maxWidth="xl">
@@ -45,7 +50,7 @@ const News = () => {
                                     {dayjs(n.date).format('D MMMM YYYY, HH:mm')}
                                 </Typography>
                                 <Button>Read full post</Button>
-                                <Button>Delete</Button>
+                                <Button onClick={() => onDelete(n.id)}>Delete</Button>
                             </Box>
                         </CardContent>
                         <CardContent>

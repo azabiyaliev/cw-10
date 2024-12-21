@@ -6,7 +6,7 @@ export interface INewsWithoutIdAndDate {
 }
 
 export interface INews {
-    id: string;
+    id: number;
     title: string;
     content: string;
     image: string | null;

@@ -28,3 +28,7 @@ export const fetchPostNews = createAsyncThunk<void, INewsWithoutIdAndDate>(
 
         await axiosAPI.post("/news", formData);
     });
+
+export const fetchDeleteNews = createAsyncThunk<void, number>("deleteNews/fetchDeleteNews", async (news_id) => {
+    await axiosAPI.delete(`news/${news_id}`);
+});

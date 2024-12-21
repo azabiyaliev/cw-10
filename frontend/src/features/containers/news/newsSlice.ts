@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store.ts';
 import {INews} from "../../../types";
-import {fetchNews} from "../store/thunks/thunks.ts";
+import {fetchDeleteNews, fetchNews, fetchPostNews} from "../store/thunks/thunks.ts";
 
 interface noteState {
     responseNews: INews[];
@@ -34,6 +34,24 @@ export const newsSlice = createSlice({
                 state.responseNews = action.payload;
             })
             .addCase(fetchNews.rejected, (state) => {
+                state.isFetching = false;
+            })
+            .addCase(fetchPostNews.pending, (state) => {
+                state.isFetching = true;
+            })
+            .addCase(fetchPostNews.fulfilled, (state) => {
+                state.isFetching = false;
+            })
+            .addCase(fetchPostNews.rejected, (state) => {
+                state.isFetching = false;
+            })
+            .addCase(fetchDeleteNews.pending, (state) => {
+                state.isFetching = true;
+            })
+            .addCase(fetchDeleteNews.fulfilled, (state) => {
+                state.isFetching = false;
+            })
+            .addCase(fetchDeleteNews.rejected, (state) => {
                 state.isFetching = false;
             })
     },
