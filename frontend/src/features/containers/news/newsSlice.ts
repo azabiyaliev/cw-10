@@ -1,21 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store.ts';
 import {INews} from "../../../types";
-import {fetchDeleteNews, fetchNews, fetchPostNews} from "../store/thunks/thunks.ts";
+import {fetchDeleteNews, fetchNews, fetchNewsById, fetchPostNews} from "../store/thunks/thunks.ts";
 
-interface noteState {
+interface newsState {
     responseNews: INews[];
+    responseNewsById: INews | null;
     isFetching: boolean;
     isLoading: boolean;
 }
 
-const initialState: noteState = {
+const initialState: newsState = {
     responseNews: [],
+    responseNewsById: null,
     isFetching: false,
     isLoading: false,
 };
 
 export const resNewsList = (state: RootState) => state.news.responseNews;
+export const resOneNews = (state: RootState) => state.news.responseNewsById
 export const fetchLoading = (state: RootState) => state.news.isFetching;
 export const createLoading = (state: RootState) => state.news.isLoading;
 
@@ -52,6 +55,16 @@ export const newsSlice = createSlice({
                 state.isFetching = false;
             })
             .addCase(fetchDeleteNews.rejected, (state) => {
+                state.isFetching = false;
+            })
+            .addCase(fetchNewsById.pending, (state) => {
+                state.isFetching = true;
+            })
+            .addCase(fetchNewsById.fulfilled, (state, action: PayloadAction<INews>) => {
+                state.isFetching = false;
+                state.responseNewsById = action.payload;
+            })
+            .addCase(fetchNewsById.rejected, (state) => {
                 state.isFetching = false;
             })
     },

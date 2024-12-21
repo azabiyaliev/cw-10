@@ -49,7 +49,7 @@ const News = () => {
                                 <Typography sx={{ flexGrow: 1 }}>
                                     {dayjs(n.date).format('D MMMM YYYY, HH:mm')}
                                 </Typography>
-                                <Button>Read full post</Button>
+                                <Button to={`/news/${n.id}`} component={NavLink}>Read full post</Button>
                                 <Button onClick={() => onDelete(n.id)}>Delete</Button>
                             </Box>
                         </CardContent>
