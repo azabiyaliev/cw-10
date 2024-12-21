@@ -1,3 +1,10 @@
+
+export interface INewsWithoutIdAndDate {
+    title: string;
+    content: string;
+    image: File | null;
+}
+
 export interface INews {
     id: string;
     title: string;
@@ -5,5 +12,3 @@ export interface INews {
     image: string | null;
     date: string;
 }
-
-export type INewstWithoutIdAndDate = Omit<News, "id", "date">

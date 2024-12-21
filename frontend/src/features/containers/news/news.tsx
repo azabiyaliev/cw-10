@@ -6,6 +6,7 @@ import {Box, Button, Card, CardContent, CardMedia, Container, Typography} from "
 import Grid from '@mui/material/Grid2';
 import {apiUrl} from "../../../globalConstants.ts";
 import dayjs from 'dayjs'
+import {NavLink} from "react-router-dom";
 
 const News = () => {
 
@@ -23,7 +24,7 @@ const News = () => {
                 <Typography variant="h4"  sx={{ textDecoration: 'none', color:"primary", flexGrow: 1 }}>
                     Posts
                 </Typography>
-                <Button variant="outlined" sx={{ color: "primary", ms: "auto" }}>Add new post</Button>
+                <Button variant="outlined" sx={{ color: "primary", ms: "auto" }} to="/add" component={NavLink}>Add new post</Button>
             </Grid>
             {news.map(n => (
                 <div key={n.id}>
@@ -33,7 +34,6 @@ const News = () => {
                                 sx={{ height: 140 }}
                                 component="img"
                                 image={`${apiUrl}/${n.image}`}
-                                title={n.title}
                             />
                         )}
                         <CardContent sx={{ padding: '10px', gridRow: '1rem, 1rem' }}>
